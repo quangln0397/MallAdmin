@@ -7,9 +7,11 @@ import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './Components/Reducers/rootReducer';
 
+import { BrowserRouter } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles'
 import { createStore, applyMiddleware, compose } from 'redux';
+import { red, grey } from '@material-ui/core/colors';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
@@ -20,16 +22,17 @@ const store = createStore(rootReducer, composeEnhancers(
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: "#DC3838"
-    },
+    primary: red,
+    secondary: grey
   },
 });
 
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
   </Provider>
   ,
